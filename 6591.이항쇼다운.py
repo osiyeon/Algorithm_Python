@@ -1,25 +1,35 @@
-n = [0]
-k = [0]
+n = [1]
+k = [1]
 
-n[0], k[0] = map(int, input().split())
-
-while n[-1] != 0 and k[-1] != 0:
+while True:
     N, K = map(int, input().split())
-    n.append(int(N))
-    k.append(int(K))
+    if N == 0 and K == 0:
+        break
+    elif N == 0 or K > N:
+        break
+    else:
+        n.append(N)
+        k.append(K)
+del n[0]
+del k[0]
+
 
 result = []
-i = 0
-while i != len(n)-1:
+for i in range(len(n)):
     num = n[i]
-    den = k[i]
+    den = min(k[i],n[i]-k[i])
+    d = den
     p = 1
-    for j in range(k[i],1,-1):
-        num = num * (n[i]-p)
-        den = den * (k[i]-p)
-        p += 1
-    result.append(num//den)
-    i += 1
+    if den == 0:
+        result.append(1)
+    elif num == den:
+        result.append(1)
+    else:
+        for j in range(den-1,0,-1):
+            num = num * (n[i]-p)
+            d = d * (den-p)
+            p += 1
+        result.append(num//d)
 
-
-print(result)
+for r in result:
+    print(r)
