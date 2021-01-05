@@ -13,7 +13,6 @@ while True:
 del n[0]
 del k[0]
 
-
 result = []
 for i in range(len(n)):
     num = n[i]
